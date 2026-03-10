@@ -4,9 +4,9 @@ import com.pollinate.order_management_service.entity.Product;
 import com.pollinate.order_management_service.exception.ProductNotFoundException;
 import com.pollinate.order_management_service.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -18,7 +18,6 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
-
         log.info("Creating product {}", product);
         return this.productRepository.save(product);
     }
@@ -29,8 +28,8 @@ public class ProductService {
                 .orElseThrow(()-> new ProductNotFoundException("Product not found with id: " + id));
     }
 
-    public Page<Product> getAllProducts(Pageable pageable) {
+    public List<Product> getAllProducts() {
         log.info("Getting all products");
-        return this.productRepository.findAll(pageable);
+        return this.productRepository.findAll();
     }
 }

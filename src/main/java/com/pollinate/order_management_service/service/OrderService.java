@@ -8,8 +8,6 @@ import com.pollinate.order_management_service.exception.ProductNotFoundException
 import com.pollinate.order_management_service.repository.OrderRepository;
 import com.pollinate.order_management_service.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -30,9 +28,9 @@ public class OrderService {
         this.productRepository = productRepository;
     }
 
-    public Page<Order> findAllOrders(Pageable pageable) {
+    public List<Order> findAllOrders() {
         log.info("Fetching all orders");
-        return this.orderRepository.findAll(pageable);
+        return this.orderRepository.findAll();
     }
 
     public Order findOrder(Long id) {
